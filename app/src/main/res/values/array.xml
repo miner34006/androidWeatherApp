@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cityNames">
+        <item>Moscow</item>
+        <item>Saint Petersburg</item>
+        <item>Vladivostok</item>
+        <item>Kaliningrad</item>
+    </string-array>
+
+    <string-array name="cityData">
+        <item>524901:GMT+3</item>
+        <item>498817:GMT+3</item>
+        <item>2013348:GMT+10</item>
+        <item>554234:GMT+2</item>
+    </string-array>
+</resources>

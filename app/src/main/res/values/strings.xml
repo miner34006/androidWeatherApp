@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="forecast">Forecast</string>
+    <string name="details">Details</string>
+    <string name="defaultTodayTemperatureValue">0°</string>
+    <string name="defaultWeatherTypeValue">Cloudy</string>
+    <string name="defaultCityValue">City</string>
+    <string name="contentDescription_settings">settings</string>
+    <string name="contentDescription_expand">Expand</string>
+    <string name="contentDescription_weatherTypeImage">weather type image</string>
+    <string name="pref_city">cityPreference</string>
+</resources>

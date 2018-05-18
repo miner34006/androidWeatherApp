@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="vladivostok">2013348</integer>
+    <integer name="moscow">524901</integer>
+    <integer name="saintPetersburg">498817</integer>
+</resources>

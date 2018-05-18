@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:key="@string/pref_city"
+        android:title="City"
+        android:entries="@array/cityNames"
+        android:entryValues="@array/cityData"
+        android:summary="City for weather forecast"/>
+</PreferenceScreen>

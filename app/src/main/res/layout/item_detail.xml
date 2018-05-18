@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/parameter"
+        android:fontFamily="@string/font_family_light"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/parameterValue"
+        android:fontFamily="@string/font_family_light"
+        android:textColor="@color/colorWhite"
+        android:textSize="25sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/parameter"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:src="@drawable/dotted"
+        android:layerType="software"
+        app:layout_constraintTop_toBottomOf="@id/parameter" />
+</android.support.constraint.ConstraintLayout>
