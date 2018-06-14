@@ -6,9 +6,10 @@
     <string name="defaultWeatherTypeValue">Cloudy</string>
     <string name="defaultCityValue">City</string>
     <string name="contentDescription_settings">settings</string>
-    <string name="contentDescription_expand">Expand</string>
+    <string name="contentDescription_expand">expand</string>
     <string name="contentDescription_weatherTypeImage">weather type image</string>
     <string name="pref_city">cityPreference</string>
     <string name="contentDescription_rollUp">Roll up</string>
     <string name="contentDescription_weatherConditional">Weather conditional</string>
+    <string name="contentDescription_detailed_weather_image">detailed weather image</string>
 </resources>

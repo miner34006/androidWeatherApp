@@ -8,7 +8,6 @@
     >
 
     <include layout="@layout/include_background_image"/>
-
     <include layout="@layout/include_today_weather_navbar"/>
 
     <TextView
