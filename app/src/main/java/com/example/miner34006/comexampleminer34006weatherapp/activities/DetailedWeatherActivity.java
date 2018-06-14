@@ -75,16 +75,17 @@ public class DetailedWeatherActivity extends Activity {
         RecyclerView.LayoutManager mDetailLayoutManager = new LinearLayoutManager(this);
         mDetailRecyclerView.setLayoutManager(mDetailLayoutManager);
 
-        // TODO Null parameters could be passed
         ArrayList<Pair<String, String>> data = new ArrayList<>();
         WeatherData weatherData = getIntent().getParcelableExtra("WEATHER_DATA");
-        data.add(new Pair<>("HUM.", weatherData.getHumidity()));
-        data.add(new Pair<>("PR.",  weatherData.getPressure()));
-        data.add(new Pair<>("WIND",  weatherData.getWind()));
-        data.add(new Pair<>("CLOUDS",  weatherData.getClouds()));
+        data.add(new Pair<>("HUMIDITY", weatherData.getHumidity() + "%"));
+        data.add(new Pair<>("PRESSURE",  weatherData.getPressure() + "hPa"));
+        data.add(new Pair<>("WIND",  weatherData.getWind() + "m/s"));
+        data.add(new Pair<>("CLOUDS",  weatherData.getClouds() + "%"));
 
         DetailWeatherAdapter mDetailAdapter = new DetailWeatherAdapter(data);
         mDetailRecyclerView.setAdapter(mDetailAdapter);
+
+        ((ImageView) findViewById(R.id.detailedWeatherImageView)).setImageResource(weatherData.getWeatherImageResource());
     }
 
     @Override
@@ -95,10 +96,6 @@ public class DetailedWeatherActivity extends Activity {
         initBackgroundImage();
         initForecastRecycler();
         initDetailRecycler();
-
-        // TODO Null parameters could be passed
-        int detailWeatherImage = ((WeatherData)getIntent().getParcelableExtra("WEATHER_DATA")).getWeatherImageResource();
-        ((ImageView) findViewById(R.id.detailedWeatherImageView)).setImageResource(detailWeatherImage);
 
         ((TextClock) findViewById(R.id.timeTextView)).setTimeZone(WeatherPreferences.getPreferredTimeZone(this));
         ((TextView) findViewById(R.id.cityTextView)).setText(WeatherPreferences.getPreferredCityName(this));
