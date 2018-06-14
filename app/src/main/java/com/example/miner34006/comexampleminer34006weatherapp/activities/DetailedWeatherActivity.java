@@ -12,12 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
 
-import com.example.miner34006.comexampleminer34006weatherapp.DetailWeatherAdapter;
+import com.example.miner34006.comexampleminer34006weatherapp.adapters.DetailWeatherAdapter;
 import com.example.miner34006.comexampleminer34006weatherapp.R;
-import com.example.miner34006.comexampleminer34006weatherapp.WeatherAdapter;
+import com.example.miner34006.comexampleminer34006weatherapp.adapters.WeatherAdapter;
 import com.example.miner34006.comexampleminer34006weatherapp.data.WeatherData;
 import com.example.miner34006.comexampleminer34006weatherapp.data.WeatherPreferences;
-import com.example.miner34006.comexampleminer34006weatherapp.utils.pojo.forecastWeatherData.ForecastWeatherData;
+import com.example.miner34006.comexampleminer34006weatherapp.pojo.forecastWeatherData.ForecastWeatherData;
 
 import java.util.ArrayList;
 
@@ -77,15 +77,15 @@ public class DetailedWeatherActivity extends Activity {
 
         ArrayList<Pair<String, String>> data = new ArrayList<>();
         WeatherData weatherData = getIntent().getParcelableExtra("WEATHER_DATA");
-        data.add(new Pair<>("HUMIDITY", weatherData.getHumidity() + "%"));
-        data.add(new Pair<>("PRESSURE",  weatherData.getPressure() + "hPa"));
-        data.add(new Pair<>("WIND",  weatherData.getWind() + "m/s"));
-        data.add(new Pair<>("CLOUDS",  weatherData.getClouds() + "%"));
+        data.add(new Pair<>("HUMIDITY", weatherData.getmHumidity() + "%"));
+        data.add(new Pair<>("PRESSURE",  weatherData.getmPressure() + "hPa"));
+        data.add(new Pair<>("WIND",  weatherData.getmWind() + "m/s"));
+        data.add(new Pair<>("CLOUDS",  weatherData.getmClouds() + "%"));
 
         DetailWeatherAdapter mDetailAdapter = new DetailWeatherAdapter(data);
         mDetailRecyclerView.setAdapter(mDetailAdapter);
 
-        ((ImageView) findViewById(R.id.detailedWeatherImageView)).setImageResource(weatherData.getWeatherImageResource());
+        ((ImageView) findViewById(R.id.detailedWeatherImageView)).setImageResource(weatherData.getmWeatherImageResource());
     }
 
     @Override

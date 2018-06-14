@@ -1,4 +1,4 @@
-package com.example.miner34006.comexampleminer34006weatherapp;
+package com.example.miner34006.comexampleminer34006weatherapp.adapters;
 
 
 import android.content.Context;
@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.miner34006.comexampleminer34006weatherapp.R;
 
 import java.util.ArrayList;
 

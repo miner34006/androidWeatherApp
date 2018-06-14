@@ -1,4 +1,4 @@
-package com.example.miner34006.comexampleminer34006weatherapp.utils.pojo.currentWeatherData;
+package com.example.miner34006.comexampleminer34006weatherapp.pojo.currentWeatherData;
 
 public class Sys
 {

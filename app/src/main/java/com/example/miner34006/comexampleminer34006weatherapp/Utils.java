@@ -1,11 +1,10 @@
-package com.example.miner34006.comexampleminer34006weatherapp.utils;
+package com.example.miner34006.comexampleminer34006weatherapp;
 
 import android.content.Context;
 
-import com.example.miner34006.comexampleminer34006weatherapp.R;
 import com.example.miner34006.comexampleminer34006weatherapp.data.WeatherData;
 import com.example.miner34006.comexampleminer34006weatherapp.data.WeatherPreferences;
-import com.example.miner34006.comexampleminer34006weatherapp.utils.pojo.currentWeatherData.CurrentWeatherResponse;
+import com.example.miner34006.comexampleminer34006weatherapp.pojo.currentWeatherData.CurrentWeatherResponse;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -64,17 +63,17 @@ public class Utils {
         String timeZone = WeatherPreferences.getPreferredTimeZone(context);
         int weatherImageResource = Utils.getImageResource(weatherTypeId, unixTime, timeZone);
 
-        weatherData.setWeatherImageResource(weatherImageResource);
-        weatherData.setClouds(String.valueOf(data.getClouds().getAll()));
-        weatherData.setHumidity(String.valueOf(data.getMain().getHumidity()));
-        weatherData.setPressure(String.valueOf(data.getMain().getPressure()));
-        weatherData.setWind(String.valueOf(data.getWind().getSpeed()));
+        weatherData.setmWeatherImageResource(weatherImageResource);
+        weatherData.setmClouds(String.valueOf(data.getClouds().getAll()));
+        weatherData.setmHumidity(String.valueOf(data.getMain().getHumidity()));
+        weatherData.setmPressure(String.valueOf(data.getMain().getPressure()));
+        weatherData.setmWind(String.valueOf(data.getWind().getSpeed()));
 
         String temperature = String.valueOf(Math.round(Float.parseFloat(data.getMain().getTemp())));
-        weatherData.setTemperature(temperature);
+        weatherData.setmTemperature(temperature);
 
         String weatherTypeName = data.getWeather()[0].getMain();
-        weatherData.setWeatherTypeName(weatherTypeName);
+        weatherData.setmWeatherTypeName(weatherTypeName);
 
         return weatherData;
     }

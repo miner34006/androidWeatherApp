@@ -1,4 +1,4 @@
-package com.example.miner34006.comexampleminer34006weatherapp;
+package com.example.miner34006.comexampleminer34006weatherapp.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,10 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.miner34006.comexampleminer34006weatherapp.R;
 import com.example.miner34006.comexampleminer34006weatherapp.data.WeatherPreferences;
-import com.example.miner34006.comexampleminer34006weatherapp.utils.Utils;
-import com.example.miner34006.comexampleminer34006weatherapp.utils.pojo.forecastWeatherData.ForecastWeatherData;
-import com.example.miner34006.comexampleminer34006weatherapp.utils.pojo.forecastWeatherData.List;
+import com.example.miner34006.comexampleminer34006weatherapp.Utils;
+import com.example.miner34006.comexampleminer34006weatherapp.pojo.forecastWeatherData.ForecastWeatherData;
+import com.example.miner34006.comexampleminer34006weatherapp.pojo.forecastWeatherData.List;
 
 
 public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherHolder> {

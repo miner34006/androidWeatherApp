@@ -24,7 +24,8 @@
 
         <activity
             android:name=".activities.DetailedWeatherActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".activities.SettingsActivity"
@@ -36,5 +37,3 @@
         </activity>
     </application>
 </manifest>
-
-    <!--android:theme="@android:style/Theme.NoTitleBar"-->

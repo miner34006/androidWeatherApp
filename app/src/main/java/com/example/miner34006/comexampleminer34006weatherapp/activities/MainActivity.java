@@ -20,10 +20,10 @@ import android.widget.TextView;
 import com.example.miner34006.comexampleminer34006weatherapp.R;
 import com.example.miner34006.comexampleminer34006weatherapp.data.WeatherData;
 import com.example.miner34006.comexampleminer34006weatherapp.data.WeatherPreferences;
-import com.example.miner34006.comexampleminer34006weatherapp.utils.NetworkModule;
-import com.example.miner34006.comexampleminer34006weatherapp.utils.Utils;
-import com.example.miner34006.comexampleminer34006weatherapp.utils.WeatherService;
-import com.example.miner34006.comexampleminer34006weatherapp.utils.pojo.currentWeatherData.CurrentWeatherResponse;
+import com.example.miner34006.comexampleminer34006weatherapp.network.NetworkModule;
+import com.example.miner34006.comexampleminer34006weatherapp.Utils;
+import com.example.miner34006.comexampleminer34006weatherapp.network.WeatherService;
+import com.example.miner34006.comexampleminer34006weatherapp.pojo.currentWeatherData.CurrentWeatherResponse;
 
 import java.io.IOException;
 import java.util.Random;
@@ -179,9 +179,9 @@ public class MainActivity extends AppCompatActivity
     public void onLoadFinished(@NonNull Loader<CurrentWeatherResponse> loader, CurrentWeatherResponse data) {
         if (data != null) {
             mWeatherData = Utils.createWeatherDataFromResponse(data, MainActivity.this);
-            ((ImageView) findViewById(R.id.weatherTypeImageView)).setImageResource(mWeatherData.getWeatherImageResource());
-            ((TextView) findViewById(R.id.weatherTypeTextView)).setText(mWeatherData.getWeatherTypeName());
-            ((TextView) findViewById(R.id.todayTemperature)).setText(mWeatherData.getTemperature() + "\u00B0");
+            ((ImageView) findViewById(R.id.weatherTypeImageView)).setImageResource(mWeatherData.getmWeatherImageResource());
+            ((TextView) findViewById(R.id.weatherTypeTextView)).setText(mWeatherData.getmWeatherTypeName());
+            ((TextView) findViewById(R.id.todayTemperature)).setText(mWeatherData.getmTemperature() + "\u00B0");
         }
     }
 

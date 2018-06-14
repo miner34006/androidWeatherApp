@@ -1,4 +1,4 @@
-package com.example.miner34006.comexampleminer34006weatherapp.utils;
+package com.example.miner34006.comexampleminer34006weatherapp.network;
 
 import android.support.annotation.NonNull;
 
@@ -14,8 +14,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkModule {
 
-    private String APP_ID = "2cd9d5977f93afd43ac8f11df0872f3f";
-    private String UNITS = "metric";
+    private final String APP_ID = "2cd9d5977f93afd43ac8f11df0872f3f";
+    private final String UNITS = "metric";
 
     private static final String BASE_URL = "http://api.openweathermap.org/data/2.5/";
 

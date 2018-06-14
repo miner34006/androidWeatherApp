@@ -1,7 +1,7 @@
-package com.example.miner34006.comexampleminer34006weatherapp.utils;
+package com.example.miner34006.comexampleminer34006weatherapp.network;
 
-import com.example.miner34006.comexampleminer34006weatherapp.utils.pojo.currentWeatherData.CurrentWeatherResponse;
-import com.example.miner34006.comexampleminer34006weatherapp.utils.pojo.forecastWeatherData.ForecastWeatherData;
+import com.example.miner34006.comexampleminer34006weatherapp.pojo.currentWeatherData.CurrentWeatherResponse;
+import com.example.miner34006.comexampleminer34006weatherapp.pojo.forecastWeatherData.ForecastWeatherData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
