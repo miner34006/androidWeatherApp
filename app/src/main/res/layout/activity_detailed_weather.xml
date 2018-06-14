@@ -4,52 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.miner34006.comexampleminer34006weatherapp.DetailedWeatherActivity">
+    tools:context="com.example.miner34006.comexampleminer34006weatherapp.activities.DetailedWeatherActivity">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <include layout="@layout/include_background_image"/>
 
-        <ImageView
-            android:id="@+id/backgroundImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            />
-    </FrameLayout>
-
-    <ImageButton
-        android:id="@+id/hideImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="25dp"
-        android:background="@drawable/expand_up"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <TextView
-        android:id="@+id/cityTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/defaultCityValue"
-        android:layout_marginTop="20dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        style="@style/defaultText"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <TextClock
-        android:id="@+id/timeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@string/font_family_light"
-        android:textColor="@color/colorWhite"
-        android:textSize="15sp"
-        app:layout_constraintLeft_toLeftOf="@id/cityTextView"
-        app:layout_constraintRight_toRightOf="@id/cityTextView"
-        app:layout_constraintTop_toBottomOf="@id/cityTextView" />
+    <include layout="@layout/include_detailed_weather_navbar"/>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

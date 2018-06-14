@@ -2,6 +2,16 @@ package com.example.miner34006.comexampleminer34006weatherapp.utils.pojo.current
 
 public class CurrentWeatherResponse
 {
+    public int getWeatherImageResource() {
+        return weatherImageResource;
+    }
+
+    public void setWeatherImageResource(int weatherImageResource) {
+        this.weatherImageResource = weatherImageResource;
+    }
+
+    private int weatherImageResource;
+
     private String id;
 
     private String dt;

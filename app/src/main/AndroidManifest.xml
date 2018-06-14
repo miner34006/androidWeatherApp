@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:launchMode="singleTop">
             <intent-filter>
@@ -23,16 +23,16 @@
         </activity>
 
         <activity
-            android:name=".DetailedWeatherActivity"
+            android:name=".activities.DetailedWeatherActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
 
         <activity
-            android:name=".SettingsActivity"
+            android:name=".activities.SettingsActivity"
             android:label="Settings"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".activities.MainActivity"/>
         </activity>
     </application>
 </manifest>

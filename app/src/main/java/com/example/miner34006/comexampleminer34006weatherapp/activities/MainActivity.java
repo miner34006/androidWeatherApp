@@ -1,6 +1,5 @@
-package com.example.miner34006.comexampleminer34006weatherapp;
+package com.example.miner34006.comexampleminer34006weatherapp.activities;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,14 +11,14 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.util.Pair;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
 
+import com.example.miner34006.comexampleminer34006weatherapp.R;
+import com.example.miner34006.comexampleminer34006weatherapp.data.WeatherData;
 import com.example.miner34006.comexampleminer34006weatherapp.data.WeatherPreferences;
 import com.example.miner34006.comexampleminer34006weatherapp.utils.NetworkModule;
 import com.example.miner34006.comexampleminer34006weatherapp.utils.Utils;
@@ -27,7 +26,6 @@ import com.example.miner34006.comexampleminer34006weatherapp.utils.WeatherServic
 import com.example.miner34006.comexampleminer34006weatherapp.utils.pojo.currentWeatherData.CurrentWeatherResponse;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Random;
 
 import retrofit2.Call;
@@ -38,15 +36,9 @@ public class MainActivity extends AppCompatActivity
 
     private ImageView mBackgroundImage;
     private TextClock mTextClock;
+    private TextView mCityTextView;
 
-    static final String BACKGROUND_IMAGE_RESOURCE = "com.example.miner34006.backgroundImage";
-    static final String WEATHER_IMAGE = "com.example.miner34006.weatherImage";
-    static final String HUMIDITY_DATA = "com.example.miner34006.humidity";
-    static final String PRESSURE_DATA = "com.example.miner34006.pressure";
-    static final String WIND_DATA = "com.example.miner34006.wind";
-    static final String CLOUDS_DATA = "com.example.miner34006.clouds";
-
-    private HashMap<String, String> mWeatherData = new HashMap<>();
+    private WeatherData mWeatherData = new WeatherData();
 
     public static WeatherService mWeatherApi = new NetworkModule().weatherService;
     private static final int FORECAST_LOADER_ID = 0;
@@ -74,13 +66,8 @@ public class MainActivity extends AppCompatActivity
                 Class receiverActivity = DetailedWeatherActivity.class;
                 Intent intent = new Intent(context, receiverActivity);
 
-                int drawableId = (int) mBackgroundImage.getTag();
-                intent.putExtra(BACKGROUND_IMAGE_RESOURCE, drawableId);
-                intent.putExtra(HUMIDITY_DATA, mWeatherData.get(HUMIDITY_DATA));
-                intent.putExtra(PRESSURE_DATA, mWeatherData.get(PRESSURE_DATA));
-                intent.putExtra(WIND_DATA, mWeatherData.get(WIND_DATA));
-                intent.putExtra(CLOUDS_DATA, mWeatherData.get(CLOUDS_DATA));
-                intent.putExtra(WEATHER_IMAGE, mWeatherData.get(WEATHER_IMAGE));
+                intent.putExtra("BACKGROUND_IMAGE", (int) mBackgroundImage.getTag());
+                intent.putExtra("WEATHER_DATA", mWeatherData);
 
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -101,10 +88,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     void updateDataInUi() {
-        Pair<String, String> weatherData = WeatherPreferences.getPreferredCityData(this);
-        String timeZone = weatherData.second;
-
-        mTextClock.setTimeZone(timeZone);
+        mTextClock.setTimeZone(WeatherPreferences.getPreferredTimeZone(this));
+        mCityTextView.setText(WeatherPreferences.getPreferredCityName(this));
         getSupportLoaderManager().restartLoader(FORECAST_LOADER_ID, null, this);
     }
 
@@ -119,6 +104,9 @@ public class MainActivity extends AppCompatActivity
 
         mTextClock = findViewById(R.id.timeTextView);
         mTextClock.setTimeZone(WeatherPreferences.getPreferredTimeZone(this));
+
+        mCityTextView =  findViewById(R.id.cityTextView);
+        mCityTextView.setText(WeatherPreferences.getPreferredCityName(MainActivity.this));
 
         LoaderCallbacks<CurrentWeatherResponse> callback = MainActivity.this;
         getSupportLoaderManager().initLoader(FORECAST_LOADER_ID, null, callback);
@@ -190,26 +178,20 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLoadFinished(@NonNull Loader<CurrentWeatherResponse> loader, CurrentWeatherResponse data) {
         if (data != null) {
-            long unixTime = System.currentTimeMillis() / 1000L;
+            long unixTime = System.currentTimeMillis();
             int weatherTypeId = Integer.parseInt(data.getWeather()[0].getId());
             String timeZone = WeatherPreferences.getPreferredTimeZone(MainActivity.this);
 
-            int weatherImageSource = Utils.getImageSource(weatherTypeId, unixTime, timeZone);
-            int temperature = Math.round(Float.parseFloat(data.getMain().getTemp()));
+            int weatherImageResource = Utils.getImageSource(weatherTypeId, unixTime, timeZone);
             String weatherTypeName = data.getWeather()[0].getMain();
-            String temperatureValue = String.valueOf(temperature) + "\u00B0";
+            String temperature = String.valueOf(Math.round(Float.parseFloat(data.getMain().getTemp()))) + "\u00B0";
 
-            ((ImageView) findViewById(R.id.weatherTypeImageView)).setImageResource(weatherImageSource);
+            ((ImageView) findViewById(R.id.weatherTypeImageView)).setImageResource(weatherImageResource);
             ((TextView) findViewById(R.id.weatherTypeTextView)).setText(weatherTypeName);
-            ((TextView) findViewById(R.id.todayTemperature)).setText(temperatureValue);
-            ((TextView) findViewById(R.id.cityTextView)).setText(data.getName());
+            ((TextView) findViewById(R.id.todayTemperature)).setText(temperature);
 
-            mWeatherData.put(WEATHER_IMAGE, String.valueOf(weatherImageSource));
-            mWeatherData.put(CLOUDS_DATA, String.valueOf(data.getClouds().getAll() + "%"));
-            mWeatherData.put(WIND_DATA, String.valueOf(data.getWind().getSpeed() + "m/c"));
-            mWeatherData.put(PRESSURE_DATA, String.valueOf(data.getMain().getPressure() + "hPa"));
-            mWeatherData.put(HUMIDITY_DATA, String.valueOf(data.getMain().getHumidity() + "%"));
-            mWeatherData.put(BACKGROUND_IMAGE_RESOURCE, String.valueOf(mBackgroundImage.getTag()));
+            mWeatherData = Utils.createWeatherDataFromResponse(data);
+            mWeatherData.setmWeatherImageResource(weatherImageResource);
         }
     }
 

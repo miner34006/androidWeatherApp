@@ -13,7 +13,6 @@ import com.example.miner34006.comexampleminer34006weatherapp.data.WeatherPrefere
 import com.example.miner34006.comexampleminer34006weatherapp.utils.Utils;
 import com.example.miner34006.comexampleminer34006weatherapp.utils.pojo.forecastWeatherData.ForecastWeatherData;
 import com.example.miner34006.comexampleminer34006weatherapp.utils.pojo.forecastWeatherData.List;
-import com.example.miner34006.comexampleminer34006weatherapp.utils.pojo.forecastWeatherData.Main;
 
 
 public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherHolder> {
@@ -21,12 +20,12 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
     private ForecastWeatherData mDataSet;
     private Context mContext;
 
-    WeatherAdapter(ForecastWeatherData mDataSet, Context mContext) {
+    public WeatherAdapter(ForecastWeatherData mDataSet, Context mContext) {
         this.mDataSet = mDataSet;
         this.mContext = mContext;
     }
 
-    void setDataSet(ForecastWeatherData mDataSet) {
+    public void setDataSet(ForecastWeatherData mDataSet) {
         this.mDataSet = mDataSet;
         notifyDataSetChanged();
     }
@@ -50,11 +49,11 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
 
             String formattedTime = Utils.transformFromUnixTime(unixTime, WeatherPreferences.getPreferredTimeZone(mContext));
             int temperature = Math.round(Float.parseFloat(weatherAtTime.getMain().getTemp()));
-            int weatherImageSource = Utils.getImageSource(weatherTypeId, unixTime, WeatherPreferences.getPreferredTimeZone(mContext));
+            //int weatherImageSource = Utils.getImageResource(weatherTypeId, unixTime, WeatherPreferences.getPreferredTimeZone(mContext));
 
             holder.mForecastTimeTextView.setText(formattedTime);
             holder.mForecastTemperatureTextView.setText(temperature + "°");
-            holder.mForecastImageView.setImageResource(weatherImageSource);
+            //holder.mForecastImageView.setImageResource(weatherImageSource);
         }
     }
 

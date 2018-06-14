@@ -17,7 +17,7 @@ public class DetailWeatherAdapter extends RecyclerView.Adapter<DetailWeatherAdap
 
     private ArrayList<Pair<String, String>> mData;
 
-    DetailWeatherAdapter(ArrayList<Pair<String, String>> mData) {
+    public DetailWeatherAdapter(ArrayList<Pair<String, String>> mData) {
         this.mData = mData;
     }
 

@@ -1,4 +1,4 @@
-package com.example.miner34006.comexampleminer34006weatherapp;
+package com.example.miner34006.comexampleminer34006weatherapp.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,11 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
 
+import com.example.miner34006.comexampleminer34006weatherapp.DetailWeatherAdapter;
+import com.example.miner34006.comexampleminer34006weatherapp.R;
+import com.example.miner34006.comexampleminer34006weatherapp.WeatherAdapter;
+import com.example.miner34006.comexampleminer34006weatherapp.data.WeatherData;
 import com.example.miner34006.comexampleminer34006weatherapp.data.WeatherPreferences;
 import com.example.miner34006.comexampleminer34006weatherapp.utils.pojo.forecastWeatherData.ForecastWeatherData;
 
@@ -23,7 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.miner34006.comexampleminer34006weatherapp.MainActivity.mWeatherApi;
+import static com.example.miner34006.comexampleminer34006weatherapp.activities.MainActivity.mWeatherApi;
 
 public class DetailedWeatherActivity extends Activity {
 
@@ -35,7 +38,7 @@ public class DetailedWeatherActivity extends Activity {
         mBackgroundImage = findViewById(R.id.backgroundImage);
 
         int defaultBackground = R.mipmap.background_spb0;
-        int drawableId = getIntent().getIntExtra(MainActivity.BACKGROUND_IMAGE_RESOURCE, defaultBackground);
+        int drawableId = getIntent().getIntExtra("BACKGROUND_IMAGE", defaultBackground);
         mBackgroundImage.setImageResource(drawableId);
 
         mBackgroundImage.post(new Runnable() {
@@ -72,11 +75,13 @@ public class DetailedWeatherActivity extends Activity {
         RecyclerView.LayoutManager mDetailLayoutManager = new LinearLayoutManager(this);
         mDetailRecyclerView.setLayoutManager(mDetailLayoutManager);
 
+        // TODO Null parameters could be passed
         ArrayList<Pair<String, String>> data = new ArrayList<>();
-        data.add(new Pair<>("HUM.", getIntent().getStringExtra(MainActivity.HUMIDITY_DATA)));
-        data.add(new Pair<>("PR.",  getIntent().getStringExtra(MainActivity.PRESSURE_DATA)));
-        data.add(new Pair<>("WIND",  getIntent().getStringExtra(MainActivity.WIND_DATA)));
-        data.add(new Pair<>("CLOUDS",  getIntent().getStringExtra(MainActivity.CLOUDS_DATA)));
+        WeatherData weatherData = getIntent().getParcelableExtra("WEATHER_DATA");
+        data.add(new Pair<>("HUM.", weatherData.getmHumidity()));
+        data.add(new Pair<>("PR.",  weatherData.getmPressure()));
+        data.add(new Pair<>("WIND",  weatherData.getmWind()));
+        data.add(new Pair<>("CLOUDS",  weatherData.getmClouds()));
 
         DetailWeatherAdapter mDetailAdapter = new DetailWeatherAdapter(data);
         mDetailRecyclerView.setAdapter(mDetailAdapter);
@@ -86,17 +91,19 @@ public class DetailedWeatherActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_weather);
-        initBackgroundImage();
 
+        initBackgroundImage();
         initForecastRecycler();
         initDetailRecycler();
 
-        int detailWeatherImage = Integer.parseInt(getIntent().getStringExtra(MainActivity.WEATHER_IMAGE));
+        // TODO Null parameters could be passed
+        int detailWeatherImage = ((WeatherData)getIntent().getParcelableExtra("WEATHER_DATA")).getmWeatherImageResource();
         ((ImageView) findViewById(R.id.detailedWeatherImageView)).setImageResource(detailWeatherImage);
 
-        //((TextClock) findViewById(R.id.timeTextView)).setTimeZone(MainActivity.TIME_ZONE);
+        ((TextClock) findViewById(R.id.timeTextView)).setTimeZone(WeatherPreferences.getPreferredTimeZone(this));
+        ((TextView) findViewById(R.id.cityTextView)).setText(WeatherPreferences.getPreferredCityName(this));
 
-        ((ImageButton) findViewById(R.id.hideImageButton)).setOnClickListener(new View.OnClickListener() {
+        (findViewById(R.id.rollUpImageButton)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
@@ -115,7 +122,6 @@ public class DetailedWeatherActivity extends Activity {
                 ForecastWeatherData data = response.body();
                 if (data != null) {
                     mForecastAdapter.setDataSet(data);
-                    ((TextView) findViewById(R.id.cityTextView)).setText(data.getCity().getName());
                 }
             }
 

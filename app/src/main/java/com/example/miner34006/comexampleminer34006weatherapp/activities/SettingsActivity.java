@@ -1,9 +1,11 @@
-package com.example.miner34006.comexampleminer34006weatherapp;
+package com.example.miner34006.comexampleminer34006weatherapp.activities;
 
 import android.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import com.example.miner34006.comexampleminer34006weatherapp.R;
 
 public class SettingsActivity extends AppCompatActivity {
 

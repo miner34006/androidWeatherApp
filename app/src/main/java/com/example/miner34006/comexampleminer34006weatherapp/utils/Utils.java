@@ -1,6 +1,12 @@
 package com.example.miner34006.comexampleminer34006weatherapp.utils;
 
+import android.content.Context;
+
 import com.example.miner34006.comexampleminer34006weatherapp.R;
+import com.example.miner34006.comexampleminer34006weatherapp.activities.MainActivity;
+import com.example.miner34006.comexampleminer34006weatherapp.data.WeatherData;
+import com.example.miner34006.comexampleminer34006weatherapp.data.WeatherPreferences;
+import com.example.miner34006.comexampleminer34006weatherapp.utils.pojo.currentWeatherData.CurrentWeatherResponse;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,7 +14,7 @@ import java.util.Objects;
 
 public class Utils {
     public static String transformFromUnixTime(long unixTime, String timeZone) {
-        Date date = new java.util.Date(unixTime * 1000L);
+        Date date = new java.util.Date(unixTime);
         SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH");
         sdf.setTimeZone(java.util.TimeZone.getTimeZone(timeZone));
         return sdf.format(date);
@@ -49,5 +55,15 @@ public class Utils {
             }
         }
         return weatherImageSource;
+    }
+
+    public static WeatherData createWeatherDataFromResponse(CurrentWeatherResponse data) {
+        WeatherData weatherData = new WeatherData();
+        weatherData.setmClouds(String.valueOf(data.getClouds().getAll()));
+        weatherData.setmHumidity(String.valueOf(data.getMain().getHumidity()));
+        weatherData.setmPressure(String.valueOf(data.getMain().getPressure()));
+        weatherData.setmWind(String.valueOf(data.getWind().getSpeed()));
+
+        return weatherData;
     }
 }

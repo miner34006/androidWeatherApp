@@ -9,4 +9,6 @@
     <string name="contentDescription_expand">Expand</string>
     <string name="contentDescription_weatherTypeImage">weather type image</string>
     <string name="pref_city">cityPreference</string>
+    <string name="contentDescription_rollUp">Roll up</string>
+    <string name="contentDescription_weatherConditional">Weather conditional</string>
 </resources>
