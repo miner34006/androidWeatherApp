@@ -4,61 +4,81 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class WeatherData implements Parcelable {
-    private String mClouds = "None";
-    private String mWind = "None";
-    private String mPressure = "None";
-    private String mHumidity = "None";
-    private int mWeatherImageResource = 0;
+    private String weatherTypeName = "None";
+    private String temperature = "None";
+    private String clouds = "None";
+    private String wind = "None";
+    private String pressure = "None";
+    private String humidity = "None";
+    private int weatherImageResource = 0;
 
-    public int getmWeatherImageResource() {
-        return mWeatherImageResource;
+    public String getWeatherTypeName() {
+        return weatherTypeName;
     }
 
-    public void setmWeatherImageResource(int mWeatherImageResource) {
-        this.mWeatherImageResource = mWeatherImageResource;
+    public void setWeatherTypeName(String weatherTypeName) {
+        this.weatherTypeName = weatherTypeName;
     }
 
-    public String getmClouds() {
-        return mClouds;
+    public String getTemperature() {
+        return temperature;
     }
 
-    public void setmClouds(String mClouds) {
-        this.mClouds = mClouds;
+    public void setTemperature(String temperature) {
+        this.temperature = temperature;
     }
 
-    public String getmWind() {
-        return mWind;
+    public int getWeatherImageResource() {
+        return weatherImageResource;
     }
 
-    public void setmWind(String mWind) {
-        this.mWind = mWind;
+    public void setWeatherImageResource(int weatherImageResource) {
+        this.weatherImageResource = weatherImageResource;
     }
 
-    public String getmPressure() {
-        return mPressure;
+    public String getClouds() {
+        return clouds;
     }
 
-    public void setmPressure(String mPressure) {
-        this.mPressure = mPressure;
+    public void setClouds(String clouds) {
+        this.clouds = clouds;
     }
 
-    public String getmHumidity() {
-        return mHumidity;
+    public String getWind() {
+        return wind;
     }
 
-    public void setmHumidity(String mHumidity) {
-        this.mHumidity = mHumidity;
+    public void setWind(String wind) {
+        this.wind = wind;
+    }
+
+    public String getPressure() {
+        return pressure;
+    }
+
+    public void setPressure(String pressure) {
+        this.pressure = pressure;
+    }
+
+    public String getHumidity() {
+        return humidity;
+    }
+
+    public void setHumidity(String humidity) {
+        this.humidity = humidity;
     }
 
     public WeatherData() {
     }
 
     protected WeatherData(Parcel in) {
-        mClouds = in.readString();
-        mWind = in.readString();
-        mPressure = in.readString();
-        mHumidity = in.readString();
-        mWeatherImageResource = in.readInt();
+        weatherTypeName = in.readString();
+        temperature = in.readString();
+        clouds = in.readString();
+        wind = in.readString();
+        pressure = in.readString();
+        humidity = in.readString();
+        weatherImageResource = in.readInt();
     }
 
     @Override
@@ -68,11 +88,13 @@ public class WeatherData implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mClouds);
-        dest.writeString(mWind);
-        dest.writeString(mPressure);
-        dest.writeString(mHumidity);
-        dest.writeInt(mWeatherImageResource);
+        dest.writeString(temperature);
+        dest.writeString(weatherTypeName);
+        dest.writeString(clouds);
+        dest.writeString(wind);
+        dest.writeString(pressure);
+        dest.writeString(humidity);
+        dest.writeInt(weatherImageResource);
     }
 
     @SuppressWarnings("unused")

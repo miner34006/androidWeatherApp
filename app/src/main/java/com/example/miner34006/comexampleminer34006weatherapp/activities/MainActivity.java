@@ -178,20 +178,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLoadFinished(@NonNull Loader<CurrentWeatherResponse> loader, CurrentWeatherResponse data) {
         if (data != null) {
-            long unixTime = System.currentTimeMillis();
-            int weatherTypeId = Integer.parseInt(data.getWeather()[0].getId());
-            String timeZone = WeatherPreferences.getPreferredTimeZone(MainActivity.this);
-
-            int weatherImageResource = Utils.getImageSource(weatherTypeId, unixTime, timeZone);
-            String weatherTypeName = data.getWeather()[0].getMain();
-            String temperature = String.valueOf(Math.round(Float.parseFloat(data.getMain().getTemp()))) + "\u00B0";
-
-            ((ImageView) findViewById(R.id.weatherTypeImageView)).setImageResource(weatherImageResource);
-            ((TextView) findViewById(R.id.weatherTypeTextView)).setText(weatherTypeName);
-            ((TextView) findViewById(R.id.todayTemperature)).setText(temperature);
-
-            mWeatherData = Utils.createWeatherDataFromResponse(data);
-            mWeatherData.setmWeatherImageResource(weatherImageResource);
+            mWeatherData = Utils.createWeatherDataFromResponse(data, MainActivity.this);
+            ((ImageView) findViewById(R.id.weatherTypeImageView)).setImageResource(mWeatherData.getWeatherImageResource());
+            ((TextView) findViewById(R.id.weatherTypeTextView)).setText(mWeatherData.getWeatherTypeName());
+            ((TextView) findViewById(R.id.todayTemperature)).setText(mWeatherData.getTemperature() + "\u00B0");
         }
     }
 

@@ -3,7 +3,6 @@ package com.example.miner34006.comexampleminer34006weatherapp.utils;
 import android.content.Context;
 
 import com.example.miner34006.comexampleminer34006weatherapp.R;
-import com.example.miner34006.comexampleminer34006weatherapp.activities.MainActivity;
 import com.example.miner34006.comexampleminer34006weatherapp.data.WeatherData;
 import com.example.miner34006.comexampleminer34006weatherapp.data.WeatherPreferences;
 import com.example.miner34006.comexampleminer34006weatherapp.utils.pojo.currentWeatherData.CurrentWeatherResponse;
@@ -57,12 +56,25 @@ public class Utils {
         return weatherImageSource;
     }
 
-    public static WeatherData createWeatherDataFromResponse(CurrentWeatherResponse data) {
+    public static WeatherData createWeatherDataFromResponse(CurrentWeatherResponse data, Context context) {
         WeatherData weatherData = new WeatherData();
-        weatherData.setmClouds(String.valueOf(data.getClouds().getAll()));
-        weatherData.setmHumidity(String.valueOf(data.getMain().getHumidity()));
-        weatherData.setmPressure(String.valueOf(data.getMain().getPressure()));
-        weatherData.setmWind(String.valueOf(data.getWind().getSpeed()));
+
+        long unixTime = System.currentTimeMillis();
+        int weatherTypeId = Integer.parseInt(data.getWeather()[0].getId());
+        String timeZone = WeatherPreferences.getPreferredTimeZone(context);
+        int weatherImageResource = Utils.getImageSource(weatherTypeId, unixTime, timeZone);
+
+        weatherData.setWeatherImageResource(weatherImageResource);
+        weatherData.setClouds(String.valueOf(data.getClouds().getAll()));
+        weatherData.setHumidity(String.valueOf(data.getMain().getHumidity()));
+        weatherData.setPressure(String.valueOf(data.getMain().getPressure()));
+        weatherData.setWind(String.valueOf(data.getWind().getSpeed()));
+
+        String temperature = String.valueOf(Math.round(Float.parseFloat(data.getMain().getTemp())));
+        weatherData.setTemperature(temperature);
+
+        String weatherTypeName = data.getWeather()[0].getMain();
+        weatherData.setWeatherTypeName(weatherTypeName);
 
         return weatherData;
     }

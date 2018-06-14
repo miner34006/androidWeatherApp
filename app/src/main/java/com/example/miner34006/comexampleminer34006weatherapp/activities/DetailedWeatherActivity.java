@@ -78,10 +78,10 @@ public class DetailedWeatherActivity extends Activity {
         // TODO Null parameters could be passed
         ArrayList<Pair<String, String>> data = new ArrayList<>();
         WeatherData weatherData = getIntent().getParcelableExtra("WEATHER_DATA");
-        data.add(new Pair<>("HUM.", weatherData.getmHumidity()));
-        data.add(new Pair<>("PR.",  weatherData.getmPressure()));
-        data.add(new Pair<>("WIND",  weatherData.getmWind()));
-        data.add(new Pair<>("CLOUDS",  weatherData.getmClouds()));
+        data.add(new Pair<>("HUM.", weatherData.getHumidity()));
+        data.add(new Pair<>("PR.",  weatherData.getPressure()));
+        data.add(new Pair<>("WIND",  weatherData.getWind()));
+        data.add(new Pair<>("CLOUDS",  weatherData.getClouds()));
 
         DetailWeatherAdapter mDetailAdapter = new DetailWeatherAdapter(data);
         mDetailRecyclerView.setAdapter(mDetailAdapter);
@@ -97,7 +97,7 @@ public class DetailedWeatherActivity extends Activity {
         initDetailRecycler();
 
         // TODO Null parameters could be passed
-        int detailWeatherImage = ((WeatherData)getIntent().getParcelableExtra("WEATHER_DATA")).getmWeatherImageResource();
+        int detailWeatherImage = ((WeatherData)getIntent().getParcelableExtra("WEATHER_DATA")).getWeatherImageResource();
         ((ImageView) findViewById(R.id.detailedWeatherImageView)).setImageResource(detailWeatherImage);
 
         ((TextClock) findViewById(R.id.timeTextView)).setTimeZone(WeatherPreferences.getPreferredTimeZone(this));
