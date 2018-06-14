@@ -4,12 +4,12 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class WeatherData implements Parcelable {
-    private String mWeatherTypeName = "None";
-    private String mTemperature = "None";
-    private String mClouds = "None";
-    private String mWind = "None";
-    private String mPressure = "None";
-    private String mHumidity = "None";
+    private String mWeatherTypeName = "0";
+    private String mTemperature = "0";
+    private String mClouds = "0";
+    private String mWind = "0";
+    private String mPressure = "0";
+    private String mHumidity = "0";
     private int mWeatherImageResource = 0;
 
     public String getmWeatherTypeName() {
