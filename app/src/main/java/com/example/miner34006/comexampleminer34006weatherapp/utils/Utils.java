@@ -13,14 +13,14 @@ import java.util.Objects;
 
 public class Utils {
     public static String transformFromUnixTime(long unixTime, String timeZone) {
-        Date date = new java.util.Date(unixTime);
+        Date date = new java.util.Date(unixTime * 1000L);
         SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH");
         sdf.setTimeZone(java.util.TimeZone.getTimeZone(timeZone));
         return sdf.format(date);
     }
 
 
-    public static int getImageSource(Integer weatherId, long unixTime, String timeZone) {
+    public static int getImageResource(Integer weatherId, long unixTime, String timeZone) {
         String timeNow = transformFromUnixTime(unixTime, timeZone);
         int weatherImageSource = 0;
 
@@ -62,7 +62,7 @@ public class Utils {
         long unixTime = System.currentTimeMillis();
         int weatherTypeId = Integer.parseInt(data.getWeather()[0].getId());
         String timeZone = WeatherPreferences.getPreferredTimeZone(context);
-        int weatherImageResource = Utils.getImageSource(weatherTypeId, unixTime, timeZone);
+        int weatherImageResource = Utils.getImageResource(weatherTypeId, unixTime, timeZone);
 
         weatherData.setWeatherImageResource(weatherImageResource);
         weatherData.setClouds(String.valueOf(data.getClouds().getAll()));

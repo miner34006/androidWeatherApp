@@ -47,13 +47,15 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
             long unixTime = Long.parseLong(weatherAtTime.getDt());
             int weatherTypeId = Integer.parseInt(weatherAtTime.getWeather()[0].getId());
 
-            String formattedTime = Utils.transformFromUnixTime(unixTime, WeatherPreferences.getPreferredTimeZone(mContext));
+
+            String timeZone =  WeatherPreferences.getPreferredTimeZone(mContext);
+            String formattedTime = Utils.transformFromUnixTime(unixTime, timeZone);
             int temperature = Math.round(Float.parseFloat(weatherAtTime.getMain().getTemp()));
-            //int weatherImageSource = Utils.getImageResource(weatherTypeId, unixTime, WeatherPreferences.getPreferredTimeZone(mContext));
+            int weatherImageResource = Utils.getImageResource(weatherTypeId, unixTime, timeZone);
 
             holder.mForecastTimeTextView.setText(formattedTime);
-            holder.mForecastTemperatureTextView.setText(temperature + "°");
-            //holder.mForecastImageView.setImageResource(weatherImageSource);
+            holder.mForecastTemperatureTextView.setText(temperature + "\u00B0");
+            holder.mForecastImageView.setImageResource(weatherImageResource);
         }
     }
 
